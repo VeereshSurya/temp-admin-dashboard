@@ -3,50 +3,33 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { TooltipModule } from 'primeng/tooltip'; // ✅ PrimeNG tooltip
+import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { TooltipModule } from 'primeng/tooltip';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-sidebar-layout',
   standalone: true,
-  imports: [RouterModule, PanelMenuModule, CommonModule, TooltipModule],
+  imports: [RouterModule, PanelMenuModule, CommonModule, TooltipModule,BadgeModule,OverlayPanelModule],
   templateUrl: './sidebar-layout.component.html',
   styleUrl: './sidebar-layout.component.css',
 })
 export class SidebarLayoutComponent {
-  //  items: MenuItem[] = [
-  //   {
-  //     label: 'Dashboard',
-  //     icon: 'pi pi-home',
-  //     routerLink: ['/dashboard']
-  //   },
-  //   {
-  //     label: 'Users',
-  //     icon: 'pi pi-users',
-  //     routerLink: ['/users']
-  //   },
-  //   {
-  //     label: 'Authors',
-  //     icon: 'pi pi-id-card',
-  //     routerLink: ['/authors']
-  //   },
-  //   {
-  //     label: 'Articles',
-  //     icon: 'pi pi-file',
-  //     routerLink: ['/articles']
-  //   },
-  //   {
-  //     label: 'Advertisement',
-  //     icon: 'pi pi-bullhorn',
-  //     routerLink: ['/advertisement']
-  //   }
-  // ];
 
   isCollapsed = false;
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  notificationCount = 3;
+
+notifications = [
+  { title: 'New article posted', time: '2 minutes ago' },
+  { title: 'User registration completed', time: '15 minutes ago' },
+  { title: 'Ad request submitted', time: '1 hour ago' }
+];
 
   // ✅ Sidebar items config
   sidebarItems = [
