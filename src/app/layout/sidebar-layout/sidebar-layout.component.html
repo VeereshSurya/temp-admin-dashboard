@@ -1,32 +1,44 @@
 <div class="flex min-h-screen">
   <!-- Sidebar -->
   <aside
-    [ngClass]="isCollapsed ? 'w-20' : 'w-64'"
+    [ngClass]="isCollapsed ? 'w-18 items-center' : 'w-50'"
     class="bg-gray-900 text-white transition-all duration-300 ease-in-out flex flex-col"
   >
-    <!-- Header with toggle button -->
-    <div class="flex items-center justify-between px-4 py-4 border-b border-gray-700">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b border-gray-700 w-full">
       <span *ngIf="!isCollapsed" class="text-xl font-bold">Admin</span>
       <button
         (click)="toggleSidebar()"
         class="p-2 hover:bg-gray-800 rounded transition-all duration-300 ease-in-out"
+        [pTooltip]="isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'"
+        tooltipPosition="right"
       >
-        <i class="pi" [ngClass]="isCollapsed ? 'pi-angle-double-right' : 'pi-angle-double-left'"></i>
+      <i
+      class="pi"
+      [ngClass]="isCollapsed ? 'pi-bars text-xl' : 'pi-chevron-left text-xl'"
+    ></i>
+    
       </button>
     </div>
 
     <!-- Sidebar Menu -->
-    <nav class="mt-4 flex flex-col gap-1 px-2">
+    <nav class="mt-4 flex flex-col gap-1 w-full">
       <a
         *ngFor="let item of sidebarItems"
         [routerLink]="item.route"
         routerLinkActive="bg-gray-700"
-        class="flex items-center gap-3 p-2 rounded hover:bg-gray-700 transition-all duration-300 ease-in-out"
+        class="flex items-center w-full p-2 rounded hover:bg-gray-700 transition-all duration-300 ease-in-out"
+        [ngClass]="isCollapsed ? 'justify-center' : 'gap-3 px-4'"
+        [pTooltip]="isCollapsed ? item.label : ''"
+        tooltipPosition="right"
       >
-        <!-- Constant Icon Size -->
-        <i class="{{ item.icon }} text-xl w-6 h-6 flex items-center justify-center"></i>
-        <!-- Toggle Label -->
-        <span *ngIf="!isCollapsed" class="whitespace-nowrap transition-opacity duration-300">{{ item.label }}</span>
+        <i
+          class="{{ item.icon }}"
+          [ngClass]="isCollapsed ? 'text-3xl' : 'text-2xl'"
+        ></i>
+        <span *ngIf="!isCollapsed" class="whitespace-nowrap transition-opacity duration-300">
+          {{ item.label }}
+        </span>
       </a>
     </nav>
   </aside>

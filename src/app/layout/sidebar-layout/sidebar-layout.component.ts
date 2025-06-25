@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { TooltipModule } from 'primeng/tooltip'; // ✅ PrimeNG tooltip
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-sidebar-layout',
   standalone: true,
-  imports: [RouterOutlet,RouterModule, PanelMenuModule,CommonModule],
+  imports: [RouterModule, PanelMenuModule,CommonModule,TooltipModule],
   templateUrl: './sidebar-layout.component.html',
   styleUrl: './sidebar-layout.component.css'
 })
@@ -53,8 +54,8 @@ export class SidebarLayoutComponent {
     { label: 'Dashboard', icon: 'pi pi-home', route: '/dashboard' },
     { label: 'Users', icon: 'pi pi-users', route: '/users' },
     { label: 'Authors', icon: 'pi pi-id-card', route: '/authors' },
-    { label: 'Articles', icon: 'pi pi-file', route: '/articles' },
-    { label: 'Advertisement', icon: 'pi pi-bullhorn', route: '/advertisement' }
+    { label: 'Articles', icon: 'pi pi-file-check', route: '/articles' },
+    { label: 'Advertisement', icon: 'pi pi-gift', route: '/advertisement' }
   ];
 
 
