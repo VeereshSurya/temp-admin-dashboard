@@ -1,46 +1,81 @@
 <div class="flex min-h-screen">
   <!-- Sidebar -->
-  <aside
-    [ngClass]="isCollapsed ? 'w-18 items-center' : 'w-50'"
-    class="bg-gray-900 text-white transition-all duration-300 ease-in-out flex flex-col"
-  >
+  <aside [ngClass]="isCollapsed ? 'w-18 items-center' : 'w-50'"
+    class="bg-gray-900 text-white transition-all duration-300 ease-in-out flex flex-col">
+
     <!-- Header -->
     <div class="flex items-center justify-between px-4 py-4 border-b border-gray-700 w-full">
       <span *ngIf="!isCollapsed" class="text-xl font-bold">Admin</span>
-      <button
-        (click)="toggleSidebar()"
-        class="p-2 hover:bg-gray-800 rounded transition-all duration-300 ease-in-out"
-        [pTooltip]="isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'"
-        tooltipPosition="right"
-      >
-      <i
-      class="pi"
-      [ngClass]="isCollapsed ? 'pi-bars text-xl' : 'pi-chevron-left text-xl'"
-    ></i>
-    
+      <button (click)="toggleSidebar()" class="p-2 hover:bg-gray-800 rounded transition-all duration-300 ease-in-out"
+        [pTooltip]="isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'" tooltipPosition="right">
+        <i class="pi" [ngClass]="isCollapsed ? 'pi-bars text-xl' : 'pi-chevron-left text-xl'"></i>
       </button>
     </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-4 flex flex-col gap-1 w-full">
-      <a
-        *ngFor="let item of sidebarItems"
-        [routerLink]="item.route"
-        routerLinkActive="bg-gray-700"
-        class="flex items-center w-full p-2 rounded hover:bg-gray-700 transition-all duration-300 ease-in-out"
-        [ngClass]="isCollapsed ? 'justify-center' : 'gap-3 px-4'"
-        [pTooltip]="isCollapsed ? item.label : ''"
-        tooltipPosition="right"
-      >
-        <i
-          class="{{ item.icon }}"
-          [ngClass]="isCollapsed ? 'text-3xl' : 'text-2xl'"
-        ></i>
+      <a *ngFor="let item of sidebarItems" [routerLink]="item.route" routerLinkActive="bg-gray-700"
+        class="flex items-center w-full rounded hover:bg-gray-700 transition-all duration-300 ease-in-out"
+        [ngClass]="isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-2'" [pTooltip]="isCollapsed ? item.label : ''"
+        tooltipPosition="right">
+        <i class="{{ item.icon }}" [ngClass]="isCollapsed ? 'text-3xl' : 'text-2xl'"></i>
         <span *ngIf="!isCollapsed" class="whitespace-nowrap transition-opacity duration-300">
           {{ item.label }}
         </span>
       </a>
     </nav>
+
+    <!-- User Info and Actions -->
+    <div class="mt-auto w-full border-t border-gray-700 px-2 py-4">
+      <!-- Profile Info (expanded) -->
+      <div class="flex items-center gap-3 px-2 mb-4" *ngIf="!isCollapsed">
+        <img [src]="user.avatar" alt="User" class="w-10 h-10 rounded-full" />
+        <span class="text-sm font-medium">{{ user.name }}</span>
+      </div>
+
+      <!-- Avatar (collapsed only) -->
+      <div *ngIf="isCollapsed" class="flex justify-center mb-4">
+        <img [src]="user.avatar" alt="User" class="w-10 h-10 rounded-full" />
+      </div>
+
+      <!-- Action buttons stacked -->
+      <nav class="flex flex-col gap-2 w-full">
+        <!-- Settings -->
+        <a [routerLink]="'/settings'" routerLinkActive="bg-gray-700"
+          class="flex items-center w-full rounded hover:bg-gray-700 transition-all duration-200"
+          [ngClass]="isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-2'" [pTooltip]="isCollapsed ? 'Settings' : ''"
+          tooltipPosition="right">
+          <i class="pi pi-cog text-xl"></i>
+          <span *ngIf="!isCollapsed">Settings</span>
+        </a>
+
+        <!-- Notifications -->
+        <a [routerLink]="'/notifications'" routerLinkActive="bg-gray-700"
+          class="relative flex items-center w-full rounded hover:bg-gray-700 transition-all duration-200"
+          [ngClass]="isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-2'"
+          [pTooltip]="isCollapsed ? 'Notifications' : ''" tooltipPosition="right">
+          <i class="pi pi-bell text-xl"></i>
+          <span *ngIf="!isCollapsed">Notifications</span>
+          <!-- Notification badge -->
+          <span class="absolute bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center"
+            [ngClass]="isCollapsed
+    ? 'top-0 right-1 translate-x-1/4 -translate-y-1/4'
+    : 'top-1 right-1'">
+            3
+          </span>
+
+        </a>
+
+        <!-- Logout -->
+        <button (click)="logout()"
+          class="flex items-center w-full rounded hover:bg-gray-700 transition-all duration-200 text-left"
+          [ngClass]="isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-2'" [pTooltip]="isCollapsed ? 'Logout' : ''"
+          tooltipPosition="right">
+          <i class="pi pi-sign-out text-xl"></i>
+          <span *ngIf="!isCollapsed">Logout</span>
+        </button>
+      </nav>
+    </div>
   </aside>
 
   <!-- Main Content -->

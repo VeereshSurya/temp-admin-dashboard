@@ -35,6 +35,11 @@ export const routes: Routes = [
         path: 'advertisement',
         loadComponent: () =>
           import('./components/advertisement/advertisement.component').then(m => m.AdvertisementComponent)
+      },
+      {
+        path: 'advertisement',
+        loadComponent: () =>
+          import('./components/settings/settings.component').then(m => m.SettingsComponent)
       }
     ]
   }
