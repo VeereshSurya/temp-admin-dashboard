@@ -19,7 +19,7 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () =>
-          import('./components/users/users.component').then(m => m.UsersComponent)
+          import('./users/components/user/user.component').then(m => m.UserComponent)
       },
       {
         path: 'authors',

@@ -1,5 +1,9 @@
 export interface User {
+  id: number;
   username: string;
+  displayName: string;
   email: string;
-  createdAt: string; // ISO format, will convert with pipe
+  profilePictureUrl: string;
+  role: string;
+  createdAt: Date;
 }

@@ -1,1 +1,27 @@
-<p>user works!</p>
+<p-table
+  [value]="users"
+  [paginator]="true"
+  [rows]="params.pageSize"
+  [totalRecords]="totalRecords"
+  [loading]="loading"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.displayName }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td *ngFor="let col of columns">
+        <ng-container [ngSwitch]="col.dataType">
+          <span *ngSwitchCase="'datetime'">{{ user[col.propertyName] | datetime }}</span>
+          <span *ngSwitchDefault>{{ user[col.propertyName] }}</span>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
